@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rivodry.github.io/sitemap.xml
+Sitemap: https://rivodry.me/sitemap.xml
 
