@@ -60,6 +60,207 @@
             color: var(--text-main);
             font-family: var(--font-sans);
             scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animate-delay-1 { transition-delay: 0.1s; }
+        .animate-delay-2 { transition-delay: 0.2s; }
+        .animate-delay-3 { transition-delay: 0.3s; }
+        .animate-delay-4 { transition-delay: 0.4s; }
+        .animate-delay-5 { transition-delay: 0.5s; }
+
+        .parallax-slow {
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
+
+        .cinematic-fade {
+            position: relative;
+        }
+
+        .cinematic-fade::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(to bottom, var(--bg-primary), transparent);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .cinematic-fade.in-view::before {
+            opacity: 1;
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .stagger-item.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glow-pulse {
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 8px rgba(199, 146, 234, 0.3)); }
+            50% { filter: drop-shadow(0 0 20px rgba(199, 146, 234, 0.6)); }
+        }
+
+        .gradient-shift {
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .line-reveal {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .line-reveal::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            transform: translateX(-100%);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .line-reveal.visible::after {
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .letter-reveal span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%) rotateX(-90deg);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .letter-reveal.visible span {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 100;
+        }
+
+        .scroll-indicator.visible {
+            opacity: 1;
+        }
+
+        .scroll-indicator-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { transform: scaleY(1); opacity: 1; }
+            50% { transform: scaleY(0.5); opacity: 0.5; }
         }
 
         .text-bright { color: var(--text-bright); }
@@ -81,8 +282,19 @@
 
         .slides-wrapper {
             display: flex;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             height: 320px;
+        }
+
+        .slide {
+            opacity: 0.5;
+            transform: scale(0.95);
+            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .slide {
@@ -237,36 +449,103 @@
 
         .project-link:hover {
             color: var(--highlight);
+            text-shadow: 0 0 20px rgba(255, 83, 112, 0.5);
         }
 
         .project-link:hover::after {
             transform: scaleX(1);
             opacity: 1;
         }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to bottom, rgba(15, 17, 26, 0.8), transparent);
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        .hero-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(199, 146, 234, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            filter: blur(60px);
+            animation: heroGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes heroGlow {
+            0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+            33% { transform: translate(30px, -30px) scale(1.1); opacity: 0.7; }
+            66% { transform: translate(-20px, 20px) scale(0.9); opacity: 0.6; }
+        }
+
+        .hero-container {
+            position: relative;
+        }
     </style>
 </head>
 <body class="selection:bg-slate-700 selection:text-white">
+    <div class="grain-overlay"></div>
+    <div class="scroll-progress-bar" style="position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--highlight)); z-index: 9999; width: 0%; transition: width 0.1s ease-out;"></div>
+    <div class="scroll-indicator" style="position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%); opacity: 0; transition: opacity 0.5s ease; z-index: 100;">
+        <div style="width: 1px; height: 40px; background: linear-gradient(to bottom, var(--accent), transparent); animation: scrollPulse 2s ease-in-out infinite;"></div>
+    </div>
 
     <div class="max-w-4xl mx-auto px-6 pt-12 md:pt-24 pb-0">
 
 
-        <header class="mb-24">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="h-px w-8 bg-slate-500"></div>
-                <span class="font-mono text-sm tracking-widest text-accent uppercase">// Building</span>
+        <header class="mb-24 hero-container">
+            <div class="hero-glow" style="top: -100px; left: -100px;"></div>
+            <div class="flex items-center gap-3 mb-6 animate-on-scroll">
+                <div class="h-px w-8 bg-slate-500 line-reveal"></div>
+                <span class="font-mono text-sm tracking-widest text-accent uppercase glow-pulse">// Building</span>
             </div>
             <h1 class="text-4xl md:text-6xl font-medium text-bright mb-6 leading-tight">
-                I'm rivodry. <br/>
-                <span class="text-accent italic">Aspiring SaaS founder </span>
+                I'm <span class="text-accent italic">rivodry.</span>
             </h1>
-            <p class="text-lg md:text-xl max-w-xl leading-relaxed opacity-80">
-                I build tools that simplify complexity. Currently working for myself.
+            <p class="text-lg md:text-xl max-w-xl leading-relaxed opacity-80 animate-on-scroll animate-delay-2">
+                I am an Aspiring SaaS founder. Currently working for myself.
                 Focused on <span class="text-highlight">user experience</span> and <span class="text-highlight">ideation</span>.
             </p>
         </header>
 
 
-        <section class="mb-12" style="border-top: 1px solid rgba(145, 148, 162, 0.3); padding-top: 2rem;">
+        <section class="mb-12 animate-on-scroll" style="border-top: 1px solid rgba(145, 148, 162, 0.3); padding-top: 2rem;">
             <div class="flex justify-between items-end mb-8">
                 <h2 class="text-4xl font-medium text-bright mb-6">Selected Works</h2>
                 <div class="flex gap-2">
@@ -284,7 +563,7 @@
 
                 <div class="slides-wrapper" id="slides-wrapper">
                     <!-- Slide 1 -->
-                    <div class="slide">
+                    <div class="slide active" data-slide="0">
                         <div class="mb-6">
                             <span class="pill font-mono">2025</span>
                         </div>
@@ -298,7 +577,7 @@
                     </div>
 
                     <!-- Slide 2 -->
-                    <div class="slide">
+                    <div class="slide" data-slide="1">
                         <div class="mb-6">
                             <span class="pill font-mono">2026</span>
                         </div>
@@ -312,7 +591,7 @@
                     </div>
 
                     <!-- Slide 3 -->
-                    <div class="slide">
+                    <div class="slide" data-slide="2">
                         <div class="mb-6">
                             <span class="pill font-mono">2026</span>
                         </div>
@@ -334,34 +613,34 @@
             </div>
         </section>
 
-<!-- The Work Section -->
-        <section class="section-fade mb-12">
+        <!-- The Work Section -->
+        <section class="section-fade mb-12 animate-on-scroll">
             <div class="mb-8">
                 <h2 class="text-4xl font-medium text-bright">The Work</h2>
             </div>
 
         <div class="w-full">
-                <a href="https://github.com/rivodry" target="_blank" rel="noopener noreferrer">
-                    <img src="https://ghchart.rshah.org/c792ea/rivodry" alt="rivodry's GitHub contributions" style="width: 100%; height: auto; min-height: 180px; border-radius: 4px; transition: all 0.3s ease; cursor: default;" onmouseover="this.style.transform='scale(1.02)';" onmouseout="this.style.transform='scale(1)';">
+                <a href="https://github.com/rivodry" target="_blank" rel="noopener noreferrer" class="block overflow-hidden rounded">
+                    <img src="https://ghchart.rshah.org/c792ea/rivodry" alt="rivodry's GitHub contributions" style="width: 100%; height: auto; min-height: 180px; border-radius: 4px; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;" onmouseover="this.style.transform='scale(1.02)'; this.style.filter='drop-shadow(0 10px 30px rgba(199, 146, 234, 0.3))';" onmouseout="this.style.transform='scale(1)'; this.style.filter='none';">
                 </a>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <footer class="section-fade pb-12">
+        <footer class="section-fade pb-12 animate-on-scroll">
             <div class="max-w-3xl mx-auto text-center">
                 <h2 class="text-4xl font-medium text-bright mb-6">Get in touch</h2>
                 <p class="opacity-70 mb-12 text-lg leading-relaxed">I'm always open to discussing new projects, creative ideas or opportunities. </p>
 
                 <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6">
-                    <a href="http://x.com/rivodry" class="project-link flex items-center gap-2 group py-1" title="Follow me on X (Twitter)">
+                    <a href="http://x.com/rivodry" class="project-link flex items-center gap-2 group py-1 magnetic-btn" title="Follow me on X (Twitter)">
                         <span class="text-lg font-mono uppercase tracking-widest">X.com</span>
                         <svg aria-hidden="true" class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:fill-highlight transition-all fill-current" viewBox="0 0 24 24">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
                         </svg>
                     </a>
 
-                    <a href="https://github.com/rivodry" class="project-link flex items-center gap-2 group py-1" title="View my projects on GitHub">
+                    <a href="https://github.com/rivodry" class="project-link flex items-center gap-2 group py-1 magnetic-btn" title="View my projects on GitHub">
                         <span class="text-lg font-mono uppercase tracking-widest">GitHub</span>
                         <svg aria-hidden="true" class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:fill-highlight transition-all fill-current" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"></path>
@@ -370,7 +649,7 @@
 
 
 
-                    <a href="mailto:" class="project-link flex items-center gap-2 group py-1" title="Send me an email">
+                    <a href="mailto:" class="project-link flex items-center gap-2 group py-1 magnetic-btn" title="Send me an email">
                         <span class="text-lg font-mono uppercase tracking-widest">Email</span>
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:text-highlight transition-all"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
                     </a>
@@ -381,7 +660,176 @@
     </div>
 
     <script>
-        // Slideshow Logic
+        // ============================================
+        // CINEMATIC SCROLL & ANIMATION SYSTEM
+        // ============================================
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -10% 0px',
+            threshold: 0.1
+        };
+
+        const animationObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-on-scroll, .stagger-item, .scale-in, .slide-in-left, .slide-in-right, .letter-reveal, .line-reveal').forEach(el => {
+            animationObserver.observe(el);
+        });
+
+        // Letter reveal animation for headings
+        function initLetterReveal() {
+            const letterRevealEl = document.querySelector('.letter-reveal');
+            if (letterRevealEl) {
+                const text = letterRevealEl.textContent;
+                letterRevealEl.innerHTML = text.split('').map(char => 
+                    char === ' ' ? ' ' : `<span style="transition-delay: ${Math.random() * 0.5}s">${char}</span>`
+                ).join('');
+                
+                setTimeout(() => {
+                    letterRevealEl.classList.add('visible');
+                }, 300);
+            }
+        }
+
+        // Smooth parallax effect for background elements only
+        let ticking = false;
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax-slow');
+            
+            parallaxElements.forEach(el => {
+                const speed = 0.05;
+                const yPos = -(scrolled * speed);
+                el.style.transform = `translateY(${yPos}px)`;
+            });
+            
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        });
+
+        // Magnetic button effect
+        document.querySelectorAll('.magnetic-btn').forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+            });
+            
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // Enhanced smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Progress indicator
+        const progressBar = document.querySelector('.scroll-progress-bar');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        
+        function updateScrollProgress() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+            
+            // Show/hide scroll indicator
+            if (scrollIndicator) {
+                if (winScroll > 100 && winScroll < height - 100) {
+                    scrollIndicator.style.opacity = '1';
+                } else {
+                    scrollIndicator.style.opacity = '0';
+                }
+            }
+        }
+
+        window.addEventListener('scroll', updateScrollProgress);
+
+        // Page load animation sequence
+        function playLoadAnimation() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach((el, i) => {
+                setTimeout(() => {
+                    el.classList.add('visible');
+                }, 200 + (i * 150));
+            });
+            
+            initLetterReveal();
+        }
+
+        // Run on load
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            playLoadAnimation();
+        });
+
+        // Custom cursor effect (subtle glow follower)
+        const cursorGlow = document.createElement('div');
+        cursorGlow.style.cssText = `
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(199, 146, 234, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9997;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        `;
+        document.body.appendChild(cursorGlow);
+
+        let cursorVisible = false;
+        document.addEventListener('mousemove', (e) => {
+            if (!cursorVisible) {
+                cursorGlow.style.opacity = '1';
+                cursorVisible = true;
+            }
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mouseleave', () => {
+            cursorGlow.style.opacity = '0';
+            cursorVisible = false;
+        });
+
+        // Initial state
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+
+        // ============================================
+        // SLIDESHOW LOGIC
+        // ============================================
         let currentSlide = 0;
         const totalSlides = 3;
         const wrapper = document.getElementById('slides-wrapper');
@@ -391,13 +839,16 @@
 
         function updateSlides() {
             wrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Update slide active states for scale/fade effect
+            document.querySelectorAll('.slide').forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
 
-            // Update dots
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentSlide);
             });
 
-            // Update counter
             counter.innerText = `${String(currentSlide + 1).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
         }
 
@@ -428,13 +879,26 @@
             startAutoPlay();
         }
 
-        // Initialize slideshow
         startAutoPlay();
 
-        // Optional: Add basic scroll listener to highlight active sections or simple interactions
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                // Potential for adding micro-interactions here
+        // Enhanced dot click with animation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                dot.style.transform = 'scale(1.5)';
+                setTimeout(() => {
+                    dot.style.transform = '';
+                }, 200);
+                goToSlide(index);
+            });
+        });
+
+        // Nav button hover effects
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.transform = 'translateY(-50%) scale(1.1)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = 'translateY(-50%)';
             });
         });
     </script>
